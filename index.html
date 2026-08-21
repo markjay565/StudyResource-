@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyResource | Academic Resource Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Global Background & Frieren Image */
+        body {
+            background-image: url('cfe2172e5036d70c43ab7179d4fa7954.jpg') !important;
+            background-size: cover !important;
+            background-position: center bottom !important;
+            background-repeat: no-repeat !important;
+            background-attachment: fixed !important;
+            background-color: #0b0f17 !important;
+            color: #ffffff !important;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Force ALL main sections to be transparent */
+        .hero, .about, .subjects, .resources, .announcements {
+            background: transparent !important;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 120px 20px 80px !important;
+            position: relative !important;
+        }
+
+        .hero-content {
+            max-width: 650px !important;
+            margin: 0 auto !important;
+            padding: 36px !important;
+            background: rgba(10, 15, 25, 0.75) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border-radius: 20px !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7) !important;
+            text-align: center !important;
+        }
+
+        .hero-content h1 {
+            color: #ffffff !important;
+            font-size: 2.2rem !important;
+            margin: 12px 0 16px !important;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9) !important;
+        }
+
+        .hero-content p {
+            color: #f1f5f9 !important;
+            font-size: 1rem !important;
+            line-height: 1.6 !important;
+            margin-bottom: 24px !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9) !important;
+        }
+
+        .welcome {
+            color: #60a5fa !important;
+            font-weight: bold !important;
+            letter-spacing: 1.5px !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9) !important;
+        }
+
+        .hero-content .btn {
+            display: inline-block !important;
+            padding: 12px 28px !important;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.85), rgba(29, 78, 216, 0.85)) !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            border-radius: 10px !important;
+            font-weight: bold !important;
+            text-decoration: none !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        /* DARK TRANSPARENT GLASS WRAPPER */
+        .content-glass-wrapper {
+            max-width: 1100px;
+            margin: 0 auto 60px auto;
+            padding: 40px 20px;
+            background: rgba(8, 12, 20, 0.78) !important;
+            backdrop-filter: blur(16px) !important;
+            -webkit-backdrop-filter: blur(16px) !important;
+            border-radius: 24px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.85) !important;
+        }
+
+        /* CARDS INSIDE WRAPPER */
+        .feature-card, 
+        .subject-card, 
+        .resource-box, 
+        .announcement-card {
+            background: rgba(15, 23, 42, 0.75) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease !important;
+        }
+
+        .feature-card:hover, 
+        .subject-card:hover, 
+        .resource-box:hover {
+            transform: translateY(-3px) !important;
+            background: rgba(30, 41, 59, 0.9) !important;
+            border-color: rgba(96, 165, 250, 0.5) !important;
+        }
+
+        /* Typography readability fixes */
+        .section-title h2, .about h2 {
+            color: #ffffff !important;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9) !important;
+        }
+
+        .section-title span, .about p {
+            color: #cbd5e1 !important;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9) !important;
+        }
+
+        .section-title p {
+            color: #60a5fa !important;
+            font-weight: bold !important;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9) !important;
+        }
+
+        .about > p {
+            color: #cbd5e1 !important;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+        }
+
+        .feature-card h3, .subject-card h3, .resource-box h3, .announcement-card h3 {
+            color: #ffffff !important;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9) !important;
+        }
+
+        .feature-card p, .subject-card p, .resource-box p, .announcement-card p {
+            color: #94a3b8 !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9) !important;
+        }
+
+        .subject-card span {
+            color: #60a5fa !important;
+        }
+
+        /* Teacher Access Button Styling */
+        .teacher-link {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            padding: 8px 16px !important;
+            border-radius: 20px !important;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+    
+<body>
+
+<header>
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">
+            <span class="logo-icon">📚</span>
+            <span class="logo-text">STUDY<span class="logo-accent">RESOURCE</span></span>
+        </a>
+        <div class="nav-links">
+            <a href="#home" class="nav-link active">Home</a>
+            <a href="#subjects" class="nav-link">Subjects</a>
+            <a href="#resources" class="nav-link">Resources</a>
+            <a href="#announcements" class="nav-link">Announcements</a>
+            <a href="2Teacher-portal.html" class="nav-link teacher-link">Teacher Access</a>
+        </div>
+    </nav>
+</header>
+
+<main>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <p class="welcome">WELCOME TO STUDYRESOURCE</p>
+            <h1>Your Centralized<br>Academic Resource Platform</h1>
+            <p>Access your learning materials, subject resources, assignments, deadlines, announcements, and useful educational links in one convenient place.</p>
+            <a href="#subjects" class="btn">Explore Resources</a>
+        </div>
+    </section>
+
+    <!-- DARK TRANSPARENT GLASS WRAPPER -->
+    <div class="content-glass-wrapper">
+
+        <section class="about">
+            <h2>Everything You Need in One Place</h2>
+            <p>StudyResource is a web-based academic resource platform designed to help students organize and access their learning materials more conveniently.</p>
+
+            <div class="feature-grid">
+                <a href="notes-reviewers.html" class="feature-card">
+                    <div class="icon">📚</div>
+                    <h3>Learning Materials</h3>
+                    <p>Find lecture notes, reviewers, modules, and other study materials organized by subject.</p>
+                </a>
+
+                <a href="deadlines.html" class="feature-card">
+                    <div class="icon">📅</div>
+                    <h3>Deadlines</h3>
+                    <p>Keep track of important academic deadlines, activities, and requirements.</p>
+                </a>
+
+                <a href="educational-links.html" class="feature-card">
+                    <div class="icon">🔗</div>
+                    <h3>Useful Links</h3>
+                    <p>Access important educational websites and reference materials from one location.</p>
+                </a>
+
+                <a href="#announcements" class="feature-card">
+                    <div class="icon">📢</div>
+                    <h3>Announcements</h3>
+                    <p>Stay updated with important class information and academic announcements.</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="subjects" id="subjects">
+            <div class="section-title">
+                <p>ACADEMIC RESOURCES</p>
+                <h2>Explore Your Subjects</h2>
+                <span>Select a subject to access its available learning resources.</span>
+            </div>
+
+            <div class="subject-grid">
+                <a href="MIL.html?title=Media%20and%20Information%20Literacy&code=MIL" class="subject-card">
+                    <span>01</span>
+                    <h3>Media and Information Literacy</h3>
+                    <p>MIL</p>
+                </a>        
+                    
+                <a href="CPAR.html?title=Contemporary%20Philippine%20Arts%20from%20the%20Regions&code=CPAR" class="subject-card">
+                    <span>02</span>
+                    <h3>Contemporary Philippine Arts from the Regions</h3>
+                    <p>CPAR</p>
+                </a>
+
+                <a href="UCSP.html?title=Understanding%20Culture,%20Society%20and%20Politics&code=UCSP" class="subject-card">
+                    <span>03</span>
+                    <h3>Understanding Culture, Society and Politics</h3>
+                    <p>UCSP</p>
+                </a>
+
+                <a href="PEH.html?title=Physical%20Education%20and%20Health&code=PEH" class="subject-card">
+                    <span>04</span>
+                    <h3>Physical Education and Health</h3>
+                    <p>PEH</p>
+                </a>
+
+                <a href="PR2.html?title=Practical%20Research%202&code=PR2" class="subject-card">
+                    <span>05</span>
+                    <h3>Practical Research 2</h3>
+                    <p>PR2</p>
+                </a>
+
+                <a href="DRRR.html?title=Disaster%20Readiness%20and%20Risk%20Reduction&code=DRRR" class="subject-card">
+                    <span>06</span>
+                    <h3>Disaster Readiness and Risk Reduction</h3>
+                    <p>DRRR</p>
+                </a>
+
+                <a href="PHYSICS.html?title=General%20Physics%201&code=PHYSICS" class="subject-card">
+                    <span>07</span>
+                    <h3>General Physics 1</h3>
+                    <p>PHYSICS</p>
+                </a>
+
+                <a href="BIOLOGY.html?title=General%20Biology%201&code=BIOLOGY" class="subject-card">
+                    <span>08</span>
+                    <h3>General Biology 1</h3>
+                    <p>BIOLOGY</p>
+                </a>
+
+                <a href="CHRISTIAN_LIVING.html?title=Christian%20Living&code=CHRISTIAN" class="subject-card">
+                    <span>09</span>
+                    <h3>Christian Living</h3>
+                    <p>CHRISTIAN LIVING</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="resources" id="resources">
+            <div class="section-title">
+                <p>QUICK ACCESS</p>
+                <h2>Academic Resources</h2>
+                <span>Quickly access the resources you need.</span>
+            </div>
+
+            <div class="resource-grid">
+                <a href="notes-reviewers.html" class="resource-box">
+                    <div class="resource-icon">📝</div>
+                    <h3>Notes & Reviewers</h3>
+                    <p>Review important lessons, notes, and study materials.</p>
+                </a>
+
+                <a href="assignments.html" class="resource-box">    
+                    <div class="resource-icon">📄</div>
+                    <h3>Assignments</h3>
+                    <p>Find activities, worksheets, and academic requirements.</p>
+                </a>
+
+                <a href="deadlines.html" class="resource-box">
+                    <div class="resource-icon">⏰</div>
+                    <h3>Upcoming Deadlines</h3>
+                    <p>Keep track of important academic deadlines and tasks.</p>
+                </a>
+
+                <a href="educational-links.html" class="resource-box">
+                    <div class="resource-icon">🌐</div>
+                    <h3>Educational Links</h3>
+                    <p>Access useful websites and online learning resources.</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="announcements" id="announcements">
+            <div class="section-title">
+                <p>LATEST UPDATES</p>
+                <h2>Class Announcements</h2>
+                <span>Stay updated with important academic news and reminders.</span>
+            </div>
+
+            <div class="announcement-list" style="max-width: 800px; margin: 30px auto 0; padding: 0 20px;">
+                <div class="announcement-card" style="padding: 20px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid #3b82f6;">
+                    <h3 style="margin-top: 0;">📢 Submission of PR2 Chapter 1</h3>
+                    <p style="font-size: 0.85rem;">Posted on: August 20, 2026</p>
+                    <p>Please submit your hard copies during our scheduled class period. Soft copies should be uploaded to the portal.</p>
+                </div>
+
+                <div class="announcement-card" style="padding: 20px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid #3b82f6;">
+                    <h3 style="margin-top: 0;">📢 General Physics 1 Quiz Next Week</h3>
+                    <p style="font-size: 0.85rem;">Posted on: August 18, 2026</p>
+                    <p>Covering Motion Reviewer units 1 to 3. Check the Notes section for complete reviewers.</p>
+                </div>
+            </div>
+        </section>
+
+    </div> <!-- END OF GLASS WRAPPER -->
+
+</main>
+
+<footer>
+    <h3>📚 STUDYRESOURCE</h3>
+    <p>A Centralized Web-Based Academic Resource Platform for Students</p>
+    <p class="copyright">© 2026 StudyResource. Academic Resource Platform.</p>
+</footer>
+
+</body>
+</html>

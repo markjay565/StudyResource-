@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments | StudyResource</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: #0f172a; color: #ffffff; padding: 20px; min-height: 100vh; }
+        .container { max-width: 800px; margin: 0 auto; }
+        
+        /* Flexbox navigation bar for top-left and top-right positioning */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .nav-btn {
+            color: #60a5fa;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .nav-btn:hover { color: #93c5fd; }
+
+        h1 { margin-bottom: 8px; font-weight: 800; }
+        p { color: #94a3b8; margin-bottom: 32px; }
+        .list-box { background: #1e293b; border-radius: 12px; padding: 20px; border: 1px solid rgba(255,255,255,0.05); }
+        .item { padding: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+        .item:last-child { border-bottom: none; }
+        .item-info { display: flex; flex-direction: column; gap: 4px; }
+        .tag { font-size: 0.75rem; font-weight: 800; color: #10b981; text-transform: uppercase; }
+        .btn { background: #2563eb; color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: 600; white-space: nowrap; transition: background 0.2s; }
+        .btn:hover { background: #1d4ed8; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- TOP NAVIGATION BAR -->
+        <div class="top-nav">
+            <a href="learning-materials.html" class="nav-btn">← Go to Learning Materials</a>
+            <a href="index.html" class="nav-btn">Back to Home →</a>
+        </div>
+        
+        <h1>📄 Assignments & Worksheets</h1>
+        <p>Download activity sheets, laboratory manuals, and requirement guidelines.</p>
+        
+        <div class="list-box">
+            <div class="item">
+                <div class="item-info">
+                    <span class="tag">PR2</span>
+                    <strong>Practical Research 2 Chapter 1 Worksheet</strong>
+                    <span style="font-size: 0.85rem; color: #94a3b8;">DOCX • Statement of the Problem Outline</span>
+                </div>
+                <a href="#" class="btn">Download</a>
+            </div>
+            <div class="item">
+                <div class="item-info">
+                    <span class="tag">BIOLOGY</span>
+                    <strong>General Biology 1 Lab Activity #2 Worksheet</strong>
+                    <span style="font-size: 0.85rem; color: #94a3b8;">PDF • Cell Structure Diagram & Analysis</span>
+                </div>
+                <a href="#" class="btn">Download</a>
+            </div>
+            <div class="item">
+                <div class="item-info">
+                    <span class="tag">PEH</span>
+                    <strong>PE & Health Fitness Log & Assessment Form</strong>
+                    <span style="font-size: 0.85rem; color: #94a3b8;">PDF • Weekly Activity Tracking Sheet</span>
+                </div>
+                <a href="#" class="btn">Download</a>
+            </div>
+            <div class="item">
+                <div class="item-info">
+                    <span class="tag">DRRR</span>
+                    <strong>Disaster Readiness Risk Assessment Case Study</strong>
+                    <span style="font-size: 0.85rem; color: #94a3b8;">DOCX • Community Hazard Mapping Sheet</span>
+                </div>
+                <a href="#" class="btn">Download</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

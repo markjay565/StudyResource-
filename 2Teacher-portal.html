@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Portal | StudyResource</title>
+    <style>
+        body {
+            /* Frieren Wallpaper */
+            background-image: url('https://raw.githubusercontent.com/Catppuccin/wallpapers/main/anime/frieren.jpg');
+            background-size: cover;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #0b0f17;
+            color: #ffffff;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            padding-top: 80px;
+        }
+
+        /* Ultra-Transparent Header */
+        .portal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 32px;
+            background: rgba(11, 15, 23, 0.25); /* Reduced opacity */
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .portal-logo {
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .portal-logo span {
+            color: #60a5fa;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #ffffff !important;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            transition: all 0.25s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .back-btn:hover {
+            background: rgba(37, 99, 235, 0.8);
+            border-color: #2563eb;
+        }
+
+        /* High-Transparency Form Container (0.2 Opacity) */
+        .portal-container {
+            max-width: 700px;
+            margin: 30px auto 40px;
+            padding: 36px;
+            background: rgba(15, 23, 42, 0.20) !important; /* Extremely light transparent tint */
+            backdrop-filter: blur(8px);                   /* Subtle blur so image details remain sharp */
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .portal-container h2 {
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: #ffffff;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.9);
+        }
+
+        .portal-container p {
+            color: #f1f5f9;
+            margin-bottom: 28px;
+            font-size: 0.95rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.9rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+        }
+
+        /* See-Through Inputs */
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(15, 23, 42, 0.3); /* Ultra transparent input boxes */
+            color: #ffffff;
+            box-sizing: border-box;
+            font-size: 0.95rem;
+            backdrop-filter: blur(4px);
+            transition: all 0.2s ease;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
+
+        .form-group select option {
+            background: #0f172a; /* Dropdown items stay solid so text is readable */
+            color: #ffffff;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #60a5fa;
+            background: rgba(15, 23, 42, 0.5);
+            box-shadow: 0 0 12px rgba(96, 165, 250, 0.5);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.75), rgba(29, 78, 216, 0.75));
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(29, 78, 216, 0.95));
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+        }
+
+        /* High-Transparency Published Items */
+        .submissions-section {
+            max-width: 700px;
+            margin: 0 auto 80px;
+        }
+
+        .submissions-section h3 {
+            margin-bottom: 16px;
+            color: #ffffff;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.9);
+        }
+
+        .submission-item {
+            background: rgba(15, 23, 42, 0.20) !important; /* Low-opacity cards */
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .submission-item div h4 {
+            margin: 0 0 4px 0;
+            color: #93c5fd;
+            font-size: 1.05rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+        }
+
+        .submission-item div p {
+            margin: 0;
+            font-size: 0.88rem;
+            color: #f1f5f9;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+        }
+
+        .delete-btn {
+            background: rgba(239, 68, 68, 0.75);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: bold;
+            backdrop-filter: blur(4px);
+            transition: background 0.2s;
+        }
+
+        .delete-btn:hover {
+            background: rgba(220, 38, 38, 1);
+        }
+
+        .toast {
+            display: none;
+            padding: 12px 20px;
+            background: rgba(16, 185, 129, 0.8);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+<header class="portal-header">
+    <div class="portal-logo">📚 STUDYRESOURCE <span>- Teacher Portal</span></div>
+    <a href="index.html" class="back-btn">← Back to Home</a>
+</header>
+
+<main>
+    <div class="portal-container">
+        <div id="toast" class="toast">Resource submitted successfully!</div>
+        <h2>Submit Learning Resource</h2>
+        <p>Upload study materials, set deadlines, or share educational links for students in real time.</p>
+        
+        <form id="teacherUploadForm">
+            <div class="form-group">
+                <label for="resourceType">Action Type</label>
+                <select id="resourceType" required>
+                    <option value="Notes">Add Notes & Reviewers</option>
+                    <option value="Assignment">Add Assignment</option>
+                    <option value="Deadline">Add Deadline</option>
+                    <option value="Link">Add Educational Link</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <select id="subject" required>
+                    <option value="MIL">Media and Information Literacy (MIL)</option>
+                    <option value="CPAR">Contemporary Philippine Arts (CPAR)</option>
+                    <option value="UCSP">Understanding Culture, Society & Politics (UCSP)</option>
+                    <option value="PEH">Physical Education and Health (PEH)</option>
+                    <option value="PR2">Practical Research 2 (PR2)</option>
+                    <option value="DRRR">Disaster Readiness & Risk Reduction (DRRR)</option>
+                    <option value="PHYSICS">General Physics 1</option>
+                    <option value="BIOLOGY">General Biology 1</option>
+                    <option value="CHRISTIAN">Christian Living</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="title">Resource Title</label>
+                <input type="text" id="title" placeholder="e.g., Chapter 1 Research Notes" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fileUrl">Resource Link / File URL</label>
+                <input type="url" id="fileUrl" placeholder="https://drive.google.com/your-file-link" required>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit to Platform</button>
+        </form>
+    </div>
+
+    <!-- Live Submissions Section -->
+    <div class="submissions-section">
+        <h3>Published Resources</h3>
+        <div id="submissionsList"></div>
+    </div>
+</main>
+
+<script>
+    const form = document.getElementById('teacherUploadForm');
+    const toast = document.getElementById('toast');
+    const submissionsList = document.getElementById('submissionsList');
+
+    function loadSubmissions() {
+        const resources = JSON.parse(localStorage.getItem('study_resources') || '[]');
+        submissionsList.innerHTML = '';
+
+        if (resources.length === 0) {
+            submissionsList.innerHTML = '<p style="color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.9);">No resources uploaded yet.</p>';
+            return;
+        }
+
+        resources.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = 'submission-item';
+            div.innerHTML = `
+                <div>
+                    <h4>[${item.type}] ${item.title}</h4>
+                    <p>Subject: ${item.subject} | Link: <a href="${item.url}" target="_blank" style="color: #93c5fd; text-decoration: underline;">${item.url}</a></p>
+                </div>
+                <button class="delete-btn" onclick="deleteResource(${index})">Remove</button>
+            `;
+            submissionsList.appendChild(div);
+        });
+    }
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const newResource = {
+            id: Date.now(),
+            type: document.getElementById('resourceType').value,
+            subject: document.getElementById('subject').value,
+            title: document.getElementById('title').value,
+            url: document.getElementById('fileUrl').value,
+            date: new Date().toLocaleDateString()
+        };
+
+        const existing = JSON.parse(localStorage.getItem('study_resources') || '[]');
+        existing.unshift(newResource);
+        localStorage.setItem('study_resources', JSON.stringify(existing));
+
+        window.dispatchEvent(new Event('storage'));
+
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 3000);
+
+        form.reset();
+        loadSubmissions();
+    });
+
+    function deleteResource(index) {
+        const existing = JSON.parse(localStorage.getItem('study_resources') || '[]');
+        existing.splice(index, 1);
+        localStorage.setItem('study_resources', JSON.stringify(existing));
+        window.dispatchEvent(new Event('storage'));
+        loadSubmissions();
+    }
+
+    loadSubmissions();
+</script>
+
+</body>
+</html>
+
+
+<style>
+    body {
+        /* Direct, permanent link to the Frieren wallpaper */
+        background-image: url('bg.jpg');
+        background-size: cover;
+        background-position: center bottom;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-color: #0b0f17;
+        color: #f1f5f9;
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+        padding-top: 80px;
+    }
+
+    /* Fixed Top Header */
+    .portal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 32px;
+        background: rgba(17, 24, 39, 0.95);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+    }
+
+    .portal-logo {
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 1.1rem;
+        letter-spacing: 0.5px;
+    }
+
+    .portal-logo span {
+        color: #60a5fa;
+    }
+
+    .back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: #ffffff !important;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 8px 16px;
+        background: rgba(30, 41, 59, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .back-btn:hover {
+        background: #2563eb;
+        border-color: #2563eb;
+    }
+
+    /* Glassmorphism Main Form Container */
+    .portal-container {
+        max-width: 700px;
+        margin: 30px auto 60px;
+        padding: 36px;
+        background: rgba(17, 24, 39, 0.82) !important;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .portal-container h2 {
+        font-size: 1.75rem;
+        margin-bottom: 8px;
+        color: #ffffff;
+    }
+
+    .portal-container p {
+        color: #cbd5e1;
+        margin-bottom: 28px;
+        font-size: 0.95rem;
+    }
+
+    .form-group {
+        margin-bottom: 22px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #f1f5f9;
+        font-size: 0.9rem;
+    }
+
+    .form-group input, .form-group select {
+        width: 100%;
+        padding: 12px 16px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(31, 41, 55, 0.9);
+        color: #ffffff;
+        box-sizing: border-box;
+        font-size: 0.95rem;
+        transition: border-color 0.2s;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+        outline: none;
+        border-color: #60a5fa;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+    }
+
+    /* Live Submissions Section */
+    .submissions-section {
+        max-width: 700px;
+        margin: 0 auto 80px;
+    }
+
+    .submissions-section h3 {
+        margin-bottom: 16px;
+        color: #ffffff;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .submission-item {
+        background: rgba(17, 24, 39, 0.82) !important;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        padding: 16px;
+        border-radius: 10px;
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .submission-item div h4 {
+        margin: 0 0 4px 0;
+        color: #60a5fa;
+    }
+
+    .submission-item div p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: #cbd5e1;
+    }
+
+    .delete-btn {
+        background: #ef4444;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+
+    .toast {
+        display: none;
+        padding: 12px 20px;
+        background: #10b981;
+        color: white;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+</style>
