@@ -228,15 +228,6 @@
             <a href="christian.html" class="nav-link-btn">CLE</a>
         </div>
     </main>
-<script>
-document.querySelectorAll('.switch-subject a').forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = link.getAttribute('href').replace(/^\//, '');
-        window.location.href = window.location.origin + '/StudyResource-/' + target.split('/').pop();
-    });
-});
-</script>
 
 </body>
 </html>
